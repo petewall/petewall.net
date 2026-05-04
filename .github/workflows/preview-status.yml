@@ -1,0 +1,39 @@
+name: PR Preview Status
+
+on: page_build
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+  PREVIEW_BASE: https://petewall.github.io/petewall.net
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Find PR number from gh-pages commit
+        id: pr
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SHA: ${{ github.event.build.commit }}
+        run: |
+          msg=$(gh api "repos/${{ github.repository }}/commits/$SHA" --jq .commit.message)
+          num=$(printf '%s' "$msg" | grep -oE 'PR #[0-9]+' | head -1 | tr -dc 0-9)
+          echo "number=$num" >> "$GITHUB_OUTPUT"
+
+      - name: Update sticky comment
+        if: steps.pr.outputs.number != ''
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          number: ${{ steps.pr.outputs.number }}
+          header: preview
+          message: |
+            ## Preview build
+
+            **Status:** ${{ github.event.build.status == 'built' && 'Live' || 'Failed' }}
+            **URL:** ${{ env.PREVIEW_BASE }}/pr-${{ steps.pr.outputs.number }}/
+            **Built from:** `${{ github.event.build.commit }}`
+            ${{ github.event.build.status != 'built' && format('**Error:** {0}', github.event.build.error.message) || '' }}
