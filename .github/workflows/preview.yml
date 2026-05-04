@@ -1,0 +1,47 @@
+name: PR Preview
+
+on:
+  pull_request:
+    branches: [main]
+
+env:
+  HUGO_VERSION: "0.161.1"
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: ${{ env.HUGO_VERSION }}
+          extended: true
+
+      - name: Build site
+        run: hugo --minify --gc --buildDrafts --baseURL "/"
+
+      - id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-preview-pr-${{ github.event.pull_request.number }}
+          path: public/
+          retention-days: 14
+
+      - uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: preview
+          message: |
+            ## Preview build
+
+            - Pages built from commit ${{ github.event.pull_request.head.sha }}
+            - [Download `site-preview-pr-${{ github.event.pull_request.number }}.zip`](${{ steps.upload.outputs.artifact-url }})
+
+            To view locally: unzip and run `python3 -m http.server` inside the extracted folder.
