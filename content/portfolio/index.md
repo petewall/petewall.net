@@ -8,27 +8,21 @@ This is a collection of examples of my work in software. I consider it to be a g
 
 ## Professional work
 
-The following have been developed to support the ISV partners during my time at both Pivotal and VMware. Much of this work is closed source and proprietary, but the following is representative of my open source work:
+As part of the Kubernetes Monitoring team at Grafana Labs, I contribute to the open source tools that customers use to ship telemetry from their clusters into Grafana Cloud.
+
+### [Kubernetes Monitoring Helm chart](https://github.com/grafana/k8s-monitoring-helm)
+
+The official Helm chart for deploying a complete Kubernetes observability stack — metrics, logs, traces, events, and cost data — built on Grafana Alloy. I contribute to the chart's design, feature development, and release process, with a focus on making the out-of-the-box experience reliable across a wide range of cluster shapes and cloud providers.
+
+### [Alloy Operator](https://github.com/grafana/alloy-operator)
+
+A Kubernetes operator that manages Grafana Alloy deployments, allowing Alloy collectors to be configured and reconciled as native Kubernetes resources. I contributed to its design and implementation in Go.
+
+The following were developed to support the ISV partners during my time at both Pivotal and VMware. Much of this work is closed source and proprietary, but the following is representative of my open source work:
 
 ### [Marketplace CLI](https://github.com/vmware-labs/marketplace-cli)
 
 A command-line interface for the VMware Marketplace, enabling automation for both users downloading software and publishers updating their products. I led the design, development in Golang, and user studies. The development is covered by CI/CD pipelines to continuously test all possible product types and functionality.
-
-### [Needs](https://github.com/cf-platform-eng/needs)
-
-A command-line utility that is used in long-running container images as a generalized method to assert that all required inputs are defined and validated at the beginning of execution. I led the design and development, written in Node.js. This is used in our continuous testing system to assert the quality of Tanzu Application Service partner integrations.
-
-### [Self Service CLI](https://github.com/cf-platform-eng/selfservice)
-
-A simple BASH implementation of the REST API for the Self Service system, which allows ISV partners to claim environments for their own learning and testing.
-
-### [Asset Relocation Tool for Kubernetes](https://github.com/vmware-tanzu/asset-relocation-tool-for-kubernetes)
-
-A tool (also called “relok8s”) that rewrites Helm Charts with modified image registry rules. This is used by our Marketplace to copy the chart and all possible images referenced by it to a remote registry.
-
-### [Validated Tanzu Partner Solutions](https://github.com/vmware-tanzu-labs/validated-tanzu-partner-solutions)
-
-A repository to collect reference architectures and deployment automation for VMware ISV partners. I created Tekton pipelines and tasks to deploy Redis Enterprise on Tanzu Kubernetes Grid clusters. These were validated by both VMware and Redis and have been used in co-selling opportunities.
 
 ## Personal projects
 
