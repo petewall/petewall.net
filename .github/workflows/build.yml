@@ -6,8 +6,8 @@ on:
   workflow_dispatch:
 
 env:
-  HUGO_VERSION: "0.161.1"
   IMAGE: ghcr.io/${{ github.repository_owner }}/petewall.net
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
 
 permissions:
   contents: read
@@ -24,7 +24,7 @@ jobs:
 
       - uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: ${{ env.HUGO_VERSION }}
+          hugo-version: latest
           extended: true
 
       - run: hugo --minify --gc
