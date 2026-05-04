@@ -6,10 +6,15 @@ on:
 
 env:
   HUGO_VERSION: "0.161.1"
+  PREVIEW_BASE: https://petewall.github.io/petewall.net
 
 permissions:
-  contents: read
+  contents: write
   pull-requests: write
+
+concurrency:
+  group: pages-preview-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
 
 jobs:
   preview:
@@ -26,7 +31,7 @@ jobs:
           extended: true
 
       - name: Build site
-        run: hugo --minify --gc --buildDrafts --baseURL "/"
+        run: hugo --minify --gc --buildDrafts --baseURL "${{ env.PREVIEW_BASE }}/pr-${{ github.event.pull_request.number }}/"
 
       - id: upload
         uses: actions/upload-artifact@v4
@@ -35,13 +40,23 @@ jobs:
           path: public/
           retention-days: 14
 
+      - name: Publish to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          destination_dir: pr-${{ github.event.pull_request.number }}
+          keep_files: true
+          commit_message: "Preview PR #${{ github.event.pull_request.number }} @ ${{ github.event.pull_request.head.sha }}"
+
       - uses: marocchino/sticky-pull-request-comment@v2
         with:
           header: preview
           message: |
             ## Preview build
 
-            - Pages built from commit ${{ github.event.pull_request.head.sha }}
-            - [Download `site-preview-pr-${{ github.event.pull_request.number }}.zip`](${{ steps.upload.outputs.artifact-url }})
+            **URL:** ${{ env.PREVIEW_BASE }}/pr-${{ github.event.pull_request.number }}/
 
-            To view locally: unzip and run `python3 -m http.server` inside the extracted folder.
+            Built from `${{ github.event.pull_request.head.sha }}`.
+
+            Also available as artifact `site-preview-pr-${{ github.event.pull_request.number }}` if the Pages deploy is unavailable.
