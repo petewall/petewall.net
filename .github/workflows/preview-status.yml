@@ -26,7 +26,7 @@ jobs:
 
       - name: Update sticky comment
         if: steps.pr.outputs.number != ''
-        uses: marocchino/sticky-pull-request-comment@v2
+        uses: marocchino/sticky-pull-request-comment@v3
         with:
           number: ${{ steps.pr.outputs.number }}
           header: preview

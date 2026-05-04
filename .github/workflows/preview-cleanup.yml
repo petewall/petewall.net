@@ -41,7 +41,7 @@ jobs:
           git commit -m "Remove preview for PR #${PR}"
           git push
 
-      - uses: marocchino/sticky-pull-request-comment@v2
+      - uses: marocchino/sticky-pull-request-comment@v3
         with:
           header: preview
           message: |
