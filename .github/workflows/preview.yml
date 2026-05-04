@@ -1,0 +1,62 @@
+name: PR Preview
+
+on:
+  pull_request:
+    branches: [main]
+
+env:
+  HUGO_VERSION: "0.161.1"
+  PREVIEW_BASE: https://petewall.github.io/petewall.net
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: pages-preview-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: ${{ env.HUGO_VERSION }}
+          extended: true
+
+      - name: Build site
+        run: hugo --minify --gc --buildDrafts --baseURL "${{ env.PREVIEW_BASE }}/pr-${{ github.event.pull_request.number }}/"
+
+      - id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-preview-pr-${{ github.event.pull_request.number }}
+          path: public/
+          retention-days: 14
+
+      - name: Publish to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          destination_dir: pr-${{ github.event.pull_request.number }}
+          keep_files: true
+          commit_message: "Preview PR #${{ github.event.pull_request.number }} @ ${{ github.event.pull_request.head.sha }}"
+
+      - uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: preview
+          message: |
+            ## Preview build
+
+            **URL:** ${{ env.PREVIEW_BASE }}/pr-${{ github.event.pull_request.number }}/
+
+            Built from `${{ github.event.pull_request.head.sha }}`.
+
+            Also available as artifact `site-preview-pr-${{ github.event.pull_request.number }}` if the Pages deploy is unavailable.
