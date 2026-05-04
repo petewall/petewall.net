@@ -48,6 +48,9 @@ menu:
     - name: Portfolio
       url: /portfolio/
       weight: 4
+    - name: Talks
+      url: /talks/
+      weight: 5
 
 markup:
   goldmark:
