@@ -1,3 +1,0 @@
-User-agent: *
-Disallow:
-Sitemap: https://petewall.github.io/petewall.net/pr-11/sitemap.xml
