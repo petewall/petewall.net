@@ -5,8 +5,8 @@ on:
     branches: [main]
 
 env:
-  HUGO_VERSION: "0.161.1"
   PREVIEW_BASE: https://petewall.github.io/petewall.net
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
 
 permissions:
   contents: write
@@ -27,7 +27,7 @@ jobs:
 
       - uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: ${{ env.HUGO_VERSION }}
+          hugo-version: latest
           extended: true
 
       - name: Build site
