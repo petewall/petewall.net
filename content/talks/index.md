@@ -28,4 +28,8 @@ In this talk, I share how I reduced the Grafana Kubernetes Monitoring Helm chart
 
 ![Pete onstage at Windy City DevFest 2023 in front of the "Turbocharge your Kubernetes Monitoring!" title slide](wcdf2023.jpg)
 
+{{< youtube id="M140Po-tnS8" start="190" >}}
+
+*Me, hanging out with [Stephen Fluin](https://fluin.io/) and Leon Sorokin.*
+
 Kubernetes clusters are now the preferred method for modern applications, but an app is only as reliable as its platform. This talk covers how to monitor your Kubernetes clusters using open source tools — Prometheus, Grafana, Loki, Mimir, Tempo, OpenTelemetry, and Grafana Agent — and how they combine into an excellent monitoring platform.
