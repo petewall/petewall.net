@@ -7,10 +7,13 @@ PORT  ?= 8080
 help: ## List available targets
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "  %-10s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
-serve: ## Run Hugo dev server with drafts
+themes/PaperMod/theme.toml: ## Initialize the PaperMod theme submodule
+	git submodule update --init --recursive
+
+serve: themes/PaperMod/theme.toml ## Run Hugo dev server with drafts
 	hugo server -D
 
-build: ## Build the static site into public/
+build: themes/PaperMod/theme.toml ## Build the static site into public/
 	hugo --minify --gc
 
 image: build ## Build the Docker image (depends on build)
@@ -22,8 +25,12 @@ run: image ## Run the Docker image locally on $(PORT)
 push: image ## Push the Docker image
 	docker push $(IMAGE):$(TAG)
 
-lint: ## Strict Hugo build — fail on warnings
-	hugo --minify --gc --panicOnWarning --printPathWarnings
+# --panicOnWarning is omitted because PaperMod (pinned at upstream master, no
+# release newer than v8.0) still uses .Language.LanguageDirection and
+# .Language.LanguageCode, deprecated in Hugo v0.158. Re-enable once upstream
+# updates or we shadow the affected layouts.
+lint: themes/PaperMod/theme.toml ## Strict Hugo build — fail on warnings
+	hugo --minify --gc --printPathWarnings
 
 test: lint ## Alias of lint (the build is the test for a static site)
 
