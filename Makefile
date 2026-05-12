@@ -2,7 +2,7 @@ IMAGE ?= ghcr.io/petewall/petewall.net
 TAG   ?= dev
 PORT  ?= 8080
 
-.PHONY: help serve build image run push lint test clean
+.PHONY: help serve build image run push lint test clean shrink-pngs
 
 help: ## List available targets
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "  %-10s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -36,3 +36,7 @@ test: lint ## Alias of lint (the build is the test for a static site)
 
 clean: ## Remove build artifacts
 	rm -rf public resources .hugo_build.lock
+
+PNG_FILES := $(shell find content -name "*.png")
+shrink-pngs: ## Compress all PNGs in content/ in-place using pngquant
+	oxipng --opt max --strip safe --zopfli --fast --verbose $(PNG_FILES)
