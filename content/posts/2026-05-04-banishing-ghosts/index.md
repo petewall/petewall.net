@@ -10,6 +10,9 @@ tags:
 series:
   - "homelab"
 summary: "Why I retired my Ghost-on-Kubernetes blog in favor of a static Hugo site."
+cover:
+  image: ghostbusters.jpg
+  alt: "Ghostbusters logo on a car"
 ---
 A few years ago, I wrote [Summoning Ghosts](/summoning-ghosts/) about standing up this blog on [Ghost](https://ghost.org/), running in my home lab Kubernetes cluster. At the time, it was a great excuse to exercise the cluster: a real workload with a database, dynamic DNS, automatic TLS, and an Ingress object I could point at. It worked. For years.
 
@@ -64,3 +67,7 @@ I've been using [Grafana Faro](https://grafana.com/oss/faro/) inside the old pag
 The general lesson, again, is the one I keep relearning in the home lab: match the complexity of the tool to the complexity of the job. Ghost is a great CMS, but I did not need a CMS. I needed a way to render markdown into HTML and serve it. Hugo plus a static nginx image is exactly that, and the difference in operational overhead is enormous.
 
 The site you're reading this on is now a single container, built from a directory of markdown files, deployed by a workflow that runs in under a minute. The ghosts are banished.
+
+---
+
+<small>Image by <a href="https://pixabay.com/users/aitoff-388338/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1515155">Andrew Martin</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1515155">Pixabay</a></small>
