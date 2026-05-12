@@ -2,7 +2,6 @@
 title: "Banishing Ghosts"
 date: "2026-05-04T12:00:00.000Z"
 slug: "banishing-ghosts"
-draft: true
 tags:
   - "blog"
   - "hugo"
