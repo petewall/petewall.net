@@ -44,6 +44,7 @@ jobs:
           tags: |
             type=sha,format=long,prefix=
             type=raw,value=latest
+            type=date,format=YYYY.MM.DD
 
       - uses: docker/build-push-action@v7
         with:
