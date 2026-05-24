@@ -5,7 +5,7 @@ slug: "on-giving-talks"
 draft: true
 tags:
   - "talks"
-summary: "How I feel about giving talks."
+summary: "My personal thoughts about giving conference talks."
 cover:
   image: empty-chairs.jpg
   alt: "Empty chairs in a theater"
