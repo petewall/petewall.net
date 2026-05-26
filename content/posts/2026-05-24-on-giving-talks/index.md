@@ -2,7 +2,7 @@
 title: "On Giving Talks"
 date: "2026-05-24T12:00:00.000Z"
 slug: "on-giving-talks"
-draft: true
+draft: false
 tags:
   - "talks"
 summary: "My personal thoughts about giving conference talks."
