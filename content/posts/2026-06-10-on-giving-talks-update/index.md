@@ -2,7 +2,7 @@
 title: "On Giving Talks: Update"
 date: "2026-06-10T12:00:00.000Z"
 slug: "on-giving-talks-update"
-draft: true
+draft: false
 tags:
   - "talks"
 summary: "A follow-up to my previous post about giving the talk at Open Source North."
