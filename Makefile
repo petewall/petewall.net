@@ -20,7 +20,7 @@ image: build ## Build the Docker image (depends on build)
 	docker build -t $(IMAGE):$(TAG) .
 
 run: image ## Run the Docker image locally on $(PORT)
-	docker run --rm -p $(PORT):80 $(IMAGE):$(TAG)
+	docker run --rm -p $(PORT):8080 $(IMAGE):$(TAG)
 
 push: image ## Push the Docker image
 	docker push $(IMAGE):$(TAG)
