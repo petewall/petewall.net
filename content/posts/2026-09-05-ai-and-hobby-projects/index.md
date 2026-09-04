@@ -41,6 +41,8 @@ How does this change in the world of AI? AI agents are supposed to make things e
 
 But just like I struggle with the concept of "done", the AIs understand it less. I can't just say "finish this project" if I haven't clearly defined what finishing looks like. And, the less specific I am, the more the AI will generate work that I feel unsure about and either re-write, or become unsatisfied and push me towards scrapping the whole project.
 
+I also firmly believe that AIs are tools and does not replace the effort and knowlege required by humans. I've worked the best with them and I still feel in control. I delegate things to them that I know what the outcome should be.
+
 ## What I'm learning
 
 1. **Keep things fun.** That's the intrinsic motivation for these projects because that's the only thing that's getting me to do them. If there's a feature or piece of the project that seems fun, do it. If there's a part that isn't fun, remove it or delay it if possible.
