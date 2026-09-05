@@ -1,6 +1,6 @@
 ---
 title: "Becoming a Golden Kubestronaut"
-date: "2026-09-04T12:00:00.000Z"
+date: "2026-09-07T12:00:00.000Z"
 slug: "golden-kubestronaut"
 draft: false
 tags:
