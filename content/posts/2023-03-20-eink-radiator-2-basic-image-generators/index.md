@@ -40,7 +40,7 @@ Where the config file is simply: `{"color": "orange"}`
 
 ### The next image source: images
 
-This one's name is even worse: "[eInk Radiator Image Source Image](https://github.com/petewall/eink-radiator-image-source-image)". Obviously, displaying images will be important. The [previous post](__GHOST_URL__/eink-radiator-1-display/) showed a few images and how they'd be rendered on the eInk hardware. The display utility requires the image to be the right resolution, so the most important part for this image source is all about resizing.
+This one's name is even worse: "[eInk Radiator Image Source Image](https://github.com/petewall/eink-radiator-image-source-image)". Obviously, displaying images will be important. The [previous post]({{< relref "/posts/2022-12-05-eink-radiator-1-display" >}}) showed a few images and how they'd be rendered on the eInk hardware. The display utility requires the image to be the right resolution, so the most important part for this image source is all about resizing.
 
 There are three methods for resizing, loosely based on the `background-size` [property in CSS](https://www.w3schools.com/cssref/css3_pr_background-size.php):
 

@@ -30,7 +30,7 @@ There are a few ways to deploy Concourse:
 - Using [Docker Compose](https://docs.docker.com/compose/). I ran this on the Mac Mini for a long time until a Docker Desktop upgrade broke things. Also, not what we're doing here.
 - A Helm chart, which intelligently deploys to Kubernetes.
 
-The last option using the chart gets me the closest to what I want, but as I talked about in the [previous post](__GHOST_URL__/summoning-ghosts/), I'm not the biggest fan of Helm charts. I haven't yet used any charts in my cluster and I didn't want to start using multiple package managers.
+The last option using the chart gets me the closest to what I want, but as I talked about in the [previous post]({{< relref "/posts/2022-07-29-summoning-ghosts" >}}), I'm not the biggest fan of Helm charts. I haven't yet used any charts in my cluster and I didn't want to start using multiple package managers.
 
 ### Concourse and Carvel
 

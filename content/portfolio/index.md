@@ -40,6 +40,6 @@ This is a Raspberry Pi based firmware to run an eInk screen that can display a v
 
 This is a collection of firmware libraries, written in C++ for the ESP8266 platform, to simplify the design and development of other projects.
 
-### [Personal website](__GHOST_URL__/)
+### [Personal website](https://github.com/petewall/petewall.net)
 
-My personal website, deployed on the Home Lab cluster using the Ghost platform. I use this to document, describe, and add additional context for the things I am working on. I balance detailed technical information with an approachable style and helpful visuals.
+My personal website, the one you're reading now. It's a static site built with Hugo, packaged into a container image, and deployed on my Home Lab cluster. GitHub Actions handle the build, publish per-PR previews, and push the image on every merge to main. I use this site to document, describe, and add additional context for the things I am working on, balancing detailed technical information with an approachable style and helpful visuals.

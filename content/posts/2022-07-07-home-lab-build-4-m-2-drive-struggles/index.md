@@ -16,7 +16,7 @@ The M910q has space for two drives, a 2.5" SATA drive and a 2280 M.2 drive. This
 
 ![Screenshot showing "Storage drives: Up to two storage drives"](specs-1.png)
 
-I had to freeze-frame YouTube videos of people installing drives to find out that the 2.5" drive needs to be 7mm, and the M.2 drive is the 2280 size. I detailed the install of the hard drives in an [earlier post](__GHOST_URL__/home-lab-build-2-installing-the-hard-drive).
+I had to freeze-frame YouTube videos of people installing drives to find out that the 2.5" drive needs to be 7mm, and the M.2 drive is the 2280 size. I detailed the install of the hard drives in an [earlier post]({{< relref "/posts/2022-07-01-home-lab-build-2-installing-the-hard-drive" >}}).
 
 For my lab, I purchased a pair of [Kingston A400 240GB](https://www.kingston.com/en/ssd/a400-solid-state-drive?partnum=sa400m8%2F240g) SSDs and popped them in. Installing an M.2 drive is remarkably simple and satisfying. I just slides right in and you're done. That, I will find, was the easiest part of the process. Immediately, I knew I had trouble when it didn't show up on the devices list in the BIOS.
 
