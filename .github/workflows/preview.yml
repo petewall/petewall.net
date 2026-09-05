@@ -31,7 +31,7 @@ jobs:
           extended: true
 
       - name: Build site
-        run: hugo --minify --gc --buildDrafts --baseURL "${{ env.PREVIEW_BASE }}/pr-${{ github.event.pull_request.number }}/"
+        run: hugo --minify --gc --buildDrafts --buildFuture --baseURL "${{ env.PREVIEW_BASE }}/pr-${{ github.event.pull_request.number }}/"
 
       - id: upload
         uses: actions/upload-artifact@v7
