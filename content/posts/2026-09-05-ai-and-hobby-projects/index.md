@@ -21,7 +21,7 @@ Scaffold notes (delete before publishing):
 - Consider linking the eInk Radiator series where it's referenced.
 -->
 
-I'm an engineer through and through, and like most of us, we like to tinker. Many of us have side projects where we get to exercise our desire to build things, unconstrained by the process and hurdles of real-world professional engineering. Often, my side projects come from a new thing that I learned about and come with a "wouldn't it be cool if…" kind of thought. I'm also just dangerous enough with coding to be able to make some of them happen.
+I'm an engineer through and through, and like most of us, we like to tinker. Many of us have side projects where we get to exercise our desire to build things, unconstrained by the process and hurdles of real-world professional engineering. Often, my side projects come from a new thing that I just learned about and come with a "wouldn't it be cool if…" kind of thought. I'm also just dangerous enough with coding to be able to make some of them happen.
 
 Why, then, do so many of my projects never reach completion? So many get to about 75% before the momentum stops, the project goes stale, and I move on to the next project… or two. I can think of a few reasons this happens.
 
@@ -29,19 +29,19 @@ Why, then, do so many of my projects never reach completion? So many get to abou
 
 First, sometimes the project is just about scratching the itch of exploring a new technology. This means that after playing with the idea a bit, my motivation starts to wane. This also means that there really might not be value in completing the project. When I was first learning about Arduino and sensors, I wanted to build remote temperature sensors in every room. I actually built several and started getting data. They looked ugly, dangling bits of circuit hanging from USB chargers. Then, after a little while, I realized that I didn't actually use the data. The real joy of the project was building something that worked. After that, the value wasn't there anymore.
 
-![The start of a clock using 14-segment units](clock.jpg)
+{{< figure src="temp-sensors.jpg" alt="A pile of temperature sensors and a microcontroller." caption="The remains of the temperature sensors. At least I still use the Wemos D1 Minis" >}}
 
 Second, it happens that I'll discover that something already exists that's just a little easier to work with. Creating something can be fun, but when you realize that there is a product or service that you can simply buy that'll be easier, faster, and better, that's hard to ignore. I spent many months buying parts and building a portable [RetroPie](https://retropie.org.uk). It was going to be a Raspberry Pi, with the 7" touch screen, a custom-built controller made with a Teensy to emulate a gamepad. It was on the shelf for months until I simply bought a Nintendo Switch and that project was scrapped.
 
-![Some parts for the portable RetroPie](retropie.jpg)
+{{< figure src="retropie.jpg" alt="A Raspberry Pi attached to a screen and a few joystick components." caption="Some parts for the portable RetroPie" >}}
 
 Third, I often can't help myself from making things harder than they need to be. All of my enterprise software and cloud native experience sometimes leads me to think that everything needs CI/CD pipelines, utilizing microservices, and GitOps, and it can't just be… simple. The [eInk Radiator project](/series/eink-radiator/) that I've written about suffered from this. I was trending towards multiple git repositories, different languages, dependency trees, and a complicated, custom user interface for such a simple concept. There is a reason that even after putting in all the work, it starts to just feel like work and not fun.
 
-![The eInk display unchanged for over four years](eink-display.jpg)
+{{< figure src="eink-display.jpg" alt="An eInk display showing an image of a cardinal." caption="The eInk display hasn't changed in over four years." >}}
 
 Fourth, finishing things is just hard. "In progress" is easy, but "done" means that you have to draw a line where it's good enough, it's complete enough, and it can live on its own. Maybe this is just the endpoint of the previous three parts: when the friction of making the project outweighs the fun, the learning potential, or the value of the finished project, then it's doomed to be shelved. On the other hand, this point also highlights that for a project to be "done", it has to stop demanding active work.
 
-![A pile of Nixie tube pieces](nixie.jpg)
+{{< figure src="nixie.jpg" alt="A pile of Nixie tubes and drivers." caption="Some parts for a nixie tube clock. Never even got started with this one." >}}
 
 ## How does AI change this?
 
@@ -61,4 +61,7 @@ I also firmly believe that AIs are tools and does not replace the effort and kno
 
 4. **Define the end goal early.** Knowing what done is helps you know if you're getting close to "graduating" the project. Realize, also, that getting to that done point doesn't mean it's done forever, it's just at a stable milestone.
 
-5. **Maybe the most important: it's OK to walk away from them.** If it's not fun, it's not worth doing.
+5. **Maybe the most important: it's OK to walk away from them.** If it's not fun, it's not worth doing. You can always come back to it later...
+
+{{< figure src="clock.jpg" alt="A solderless breadboard showing several ICs and 14-segment displays." caption="The start of a clock using 14-segment units. Maybe I should come back to this one..." >}}
+
