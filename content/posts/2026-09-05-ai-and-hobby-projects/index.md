@@ -29,11 +29,11 @@ Why, then, do so many of my projects never reach completion? So many get to abou
 
 First, sometimes the project is just about scratching the itch of exploring a new technology. This means that after playing with the idea a bit, my motivation starts to wane. This also means that there really might not be value in completing the project. When I was first learning about Arduino and sensors, I wanted to build remote temperature sensors in every room. I actually built several and started getting data. They looked ugly, dangling bits of circuit hanging from USB chargers. Then, after a little while, I realized that I didn't actually use the data. The real joy of the project was building something that worked. After that, the value wasn't there anymore.
 
-{{< figure src="temp-sensors.jpg" alt="A pile of temperature sensors and a microcontroller." caption="The remains of the temperature sensors. At least I still use the Wemos D1 Minis" >}}
+{{< figure src="temp-sensors.jpg" alt="A pile of temperature sensors and a microcontroller." caption="The remains of the temperature sensors. At least I still use the Wemos D1 Minis." >}}
 
 Second, it happens that I'll discover that something already exists that's just a little easier to work with. Creating something can be fun, but when you realize that there is a product or service that you can simply buy that'll be easier, faster, and better, that's hard to ignore. I spent many months buying parts and building a portable [RetroPie](https://retropie.org.uk). It was going to be a Raspberry Pi, with the 7" touch screen, a custom-built controller made with a Teensy to emulate a gamepad. It was on the shelf for months until I simply bought a Nintendo Switch and that project was scrapped.
 
-{{< figure src="retropie.jpg" alt="A Raspberry Pi attached to a screen and a few joystick components." caption="Some parts for the portable RetroPie" >}}
+{{< figure src="retropie.jpg" alt="A Raspberry Pi attached to a screen and a few joystick components." caption="Some parts for the portable RetroPie." >}}
 
 Third, I often can't help myself from making things harder than they need to be. All of my enterprise software and cloud native experience sometimes leads me to think that everything needs CI/CD pipelines, utilizing microservices, and GitOps, and it can't just be… simple. The [eInk Radiator project](/series/eink-radiator/) that I've written about suffered from this. I was trending towards multiple git repositories, different languages, dependency trees, and a complicated, custom user interface for such a simple concept. There is a reason that even after putting in all the work, it starts to just feel like work and not fun.
 
