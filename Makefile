@@ -2,7 +2,7 @@ IMAGE ?= ghcr.io/petewall/petewall.net
 TAG   ?= dev
 PORT  ?= 8080
 
-.PHONY: help serve build image run push lint test clean shrink-pngs shrink-jpgs
+.PHONY: help serve build image run push lint test clean shrink-pngs shrink-jpgs shrink-images
 
 help: ## List available targets
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "  %-10s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -55,3 +55,5 @@ shrink-jpgs: ## Losslessly optimize all JPGs in content/ in-place using mozjpeg
 			echo "    skipped, compressed was larger"; \
 		fi; \
 	done
+
+shrink-images: shrink-pngs shrink-jpgs ## Optimize all image formats
