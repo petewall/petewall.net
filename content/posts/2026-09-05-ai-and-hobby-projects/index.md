@@ -1,5 +1,5 @@
 ---
-title: "AI and Hobby Projects"
+title: "AI and Hobby Projectas"
 date: "2026-09-05T12:00:00.000Z"
 slug: "ai-and-hobby-projects"
 draft: true

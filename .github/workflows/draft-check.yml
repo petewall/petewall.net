@@ -1,0 +1,80 @@
+name: Draft Check
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "content/**/*.md"
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  draft-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: latest
+          extended: true
+
+      - name: Find draft content changed in this PR
+        id: drafts
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          # Files added or modified in this PR (skip deletions).
+          git diff --name-only --diff-filter=d "$BASE_SHA" "$HEAD_SHA" > changed.txt
+
+          # Ask Hugo which content is a draft. The CSV `path` column (field 1) is
+          # the content file path relative to the repo root, e.g.
+          # content/posts/<slug>/index.md — matching git's output.
+          drafts=""
+          while IFS=, read -r path _rest; do
+            [ "$path" = "path" ] && continue        # skip CSV header
+            [ -z "$path" ] && continue
+            if grep -qxF "$path" changed.txt; then   # only drafts touched by this PR
+              drafts="${drafts}- \`${path}\`"$'\n'
+            fi
+          done < <(hugo list drafts)
+
+          if [ -n "$drafts" ]; then
+            echo "has_drafts=true" >> "$GITHUB_OUTPUT"
+            {
+              echo "list<<EOF"
+              printf '%s' "$drafts"
+              echo "EOF"
+            } >> "$GITHUB_OUTPUT"
+          else
+            echo "has_drafts=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Post draft reminder
+        if: steps.drafts.outputs.has_drafts == 'true'
+        uses: marocchino/sticky-pull-request-comment@v3
+        with:
+          header: draft-check
+          message: |
+            ## ⚠️ Draft content detected
+
+            The following file(s) in this PR are marked `draft: true` and **will not show up on the published site** when merged:
+
+            ${{ steps.drafts.outputs.list }}
+            Set `draft: false` in the front matter when you're ready to publish. (Drafts still render in the PR preview build.)
+
+      - name: Clear draft reminder
+        if: steps.drafts.outputs.has_drafts != 'true'
+        uses: marocchino/sticky-pull-request-comment@v3
+        with:
+          header: draft-check
+          hide_and_recreate: true
+          hide_details: true
+          message: |
+            ✅ No draft content in this PR.
