@@ -1,8 +1,8 @@
 ---
-title: "AI and Hobby Projectas"
+title: "AI and Hobby Projects"
 date: "2026-09-05T12:00:00.000Z"
 slug: "ai-and-hobby-projects"
-draft: true
+draft: false
 tags:
   - "ai"
   - "hobby-projects"
