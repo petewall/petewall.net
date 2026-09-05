@@ -39,4 +39,4 @@ Underneath, another door opens to reveal the memory bay. It currently has a sing
 
 Inside the back, with no SATA drive and single memory stick
 
-Coming up next, I'll show how to [install the hard drives](__GHOST_URL__/home-lab-build-2-installing-the-hard-drive), the challenges with the [M.2 drives](__GHOST_URL__/home-lab-build-4-m-2-drive-struggles), and [updating the BIOS/UEFI firmware](__GHOST_URL__/home-lab-build-3-updating-the-bios-eufi).
+Coming up next, I'll show how to [install the hard drives]({{< relref "/posts/2022-07-01-home-lab-build-2-installing-the-hard-drive" >}}), the challenges with the [M.2 drives]({{< relref "/posts/2022-07-07-home-lab-build-4-m-2-drive-struggles" >}}), and [updating the BIOS/UEFI firmware]({{< relref "/posts/2022-07-01-home-lab-build-3-updating-the-bios-eufi" >}}).

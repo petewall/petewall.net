@@ -55,7 +55,7 @@ By default, Microk8s stores PersistentVolumes using the hostpath-storage add on 
     sudo rm default-storage
     sudo ln -s /data/cluster-storage default-storage
 
-**UPDATE**: I don't do this anymore, because I [stopped using the M.2 drive as my root partition](__GHOST_URL__/home-lab-6-quick-update-about-volumes/).
+**UPDATE**: I don't do this anymore, because I [stopped using the M.2 drive as my root partition]({{< relref "/posts/2022-07-27-home-lab-6-quick-update-about-volumes" >}}).
 
 ### Setting up High Availability
 

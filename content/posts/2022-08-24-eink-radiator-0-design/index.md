@@ -16,7 +16,7 @@ summary: "The start of a new series on the eInk Radiator project, a Raspberry PI
 ---
 I recall learning about test-driven development the first time. Way back when I was an Associate Software Engineer at Spanlink. Like many people, it didn't make sense at first. "Test something that doesn't exist? What's the point in that?" Exactly! Clearly, I got it because years later, at Symantec, I championed TDD for developing new features. My claim to fame was a feature delivered with only one bug reported (an absurdly long string was used by the customer). That bug was quickly found and fixed with a new test in place.
 
-At Pivotal, I encountered a whole new layer of testing with proper Continuous Integration and Continuous Delivery pipelines. Many teams were using [Concourse](__GHOST_URL__/continuous-thing-doer) to test and deploy their code, but some folks in Pivotal offices set up things called radiators.
+At Pivotal, I encountered a whole new layer of testing with proper Continuous Integration and Continuous Delivery pipelines. Many teams were using [Concourse]({{< relref "/posts/2022-08-02-continuous-thing-doer" >}}) to test and deploy their code, but some folks in Pivotal offices set up things called radiators.
 
 ![A pair of computer monitors showing CI/CD dashboards.](eink0-concourseRadiator-1.png)
 
