@@ -85,3 +85,5 @@ I spent a lot of time and money accomplishing this, and the natural question is:
 If you want to learn Kubernetes, I'd recommend the KCNA and CKAD certifications. If you want to deepen that knowledge, then get the other three (KCSA, CKA, and CKS). At that point, you've got Kubestronaut status. From there, if you want to learn a specific area, get the certs for that area. But be warned: at that point, you're probably hooked on that rush you get when the email from the Linux Foundation arrives that says "Congratulations! You have successfully completed the exam!"
 
 Plus, you get a nice jacket!
+
+{{< figure src="kubestronaut.jpg" alt="The author wearing a blue jacket with \"Kubestronaut\" across the back." caption="It doesn't get cooler than this!" >}}
