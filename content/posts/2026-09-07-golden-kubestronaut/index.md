@@ -7,6 +7,9 @@ tags:
   - "kubernetes"
   - "certifications"
 summary: "How I earned all sixteen CNCF certifications to become a Golden Kubestronaut, and my honest take on each one along the way."
+cover:
+  image: pins.jpg
+  alt: "A lanyard with metal pins for different CNCF certifications and a Kubestronaut pin."
 ---
 Recently, I completed my final certification exam, which earned me the title of [Golden Kubestronaut](https://www.cncf.io/training/kubestronaut/)! This is a journey that started six years ago, and to complete it feels like a big accomplishment. It also feels very good to be done and to no longer have to spend my free time studying. In this post, I'll discuss the history around this process, my thoughts on the individual certifications themselves, and what I think this means going forward.
 
@@ -29,6 +32,8 @@ The [Kubestronaut program](https://www.cncf.io/training/kubestronaut/) is a spec
 * <span style="display:flex;justify-content:space-between;align-items:center;gap:0.75rem;"><span>[Certified Kubernetes Security Specialist (CKS)](https://training.linuxfoundation.org/certification/certified-kubernetes-security-specialist/), which builds on the KCSA and specializes in securing the cluster, detecting vulnerabilities, and mitigating risks.</span><img src="cks.png" alt="" width="48" style="flex:none;"></span>
 
 Once you've earned these certifications, you become a Kubestronaut, which provides recognition for a level of knowledge and proficiency in Kubernetes. It also comes with a sweet jacket! I earned this title only a month later, and at KubeCon 2025 in Atlanta, I joined the other Kubestronauts for an exclusive breakfast, followed by a picture on stage.
+
+{{< figure src="kubestronauts.jpg" alt="The KubeCon 2025 stage full of people wearing Kubestronaut gear." caption="My people... I forgot my jacket that day. 🤦🏻‍♂️" >}}
 
 ## Going for gold
 
