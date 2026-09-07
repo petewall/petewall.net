@@ -37,7 +37,7 @@ Once you've earned these certifications, you become a Kubestronaut, which provid
 
 ## Going for gold
 
-I had some Learning and Development budget to spend in 2025, and with a coupon code from Atlanta KubeCon, I bought the [Golden Kubestronaut Bundle](https://training.linuxfoundation.org/certification/golden-kubestronaut-bundle/), which is exam credits for all sixteen certifications required. So that's eleven more I had to get, plus one that was going to expire (the CKS). Now, these exam credits expire in one year, so this meant I was embarking on trying to get one certification per month for the next year. Let's go! I knocked out cert after cert until my last one, a week ago.
+I had some Learning and Development budget to spend in 2025, and with a coupon code from Atlanta KubeCon, I bought the [Golden Kubestronaut Bundle](https://training.linuxfoundation.org/certification/golden-kubestronaut-bundle/), which is exam credits for all sixteen certifications required. So that's eleven more I had to get, plus one that was going to expire (the CKS). Now, these exam credits expire in one year, so this meant I was embarking on a mission to earn one certification per month for the next year. Let's go! I knocked out cert after cert until my last one, a week ago.
 
 ## The certifications
 
@@ -49,7 +49,7 @@ Many of these certs go beyond core Kubernetes, exploring the specialized and com
 
 ### LFCS
 
-<img src="lfcs.png" alt="Linux Foundation Certified System Administrator badge" width="96" style="float:right;height:auto;margin:0 0 0.5rem 1.25rem;">Kubernetes nodes are nearly always running Linux, so having a good comprehension of how Linux works is useful. The [Linux Foundation Certified System Administrator (LFCS)](https://training.linuxfoundation.org/certification/linux-foundation-certified-sysadmin-lfcs/) isn't a Kubernetes certification, though, so it explores systems you'll likely not encounter otherwise. This one is hands-on, so it's best to really know and practice these things. I think my biggest frustration was with the portions running virtual machines, which is… not Kubernetes.
+<img src="lfcs.png" alt="Linux Foundation Certified System Administrator badge" width="96" style="float:right;height:auto;margin:0 0 0.5rem 1.25rem;">Kubernetes nodes are nearly always running Linux, so having a good comprehension of how Linux works is useful. The [Linux Foundation Certified System Administrator (LFCS)](https://training.linuxfoundation.org/certification/linux-foundation-certified-sysadmin-lfcs/) isn't a Kubernetes certification, though, so it explores systems you'll likely not encounter otherwise. This one is hands-on, so it's best to really know and practice these things. I think my biggest challenge was with the portions about running virtual machines, which is… not Kubernetes.
 
 ### CGOA & CAPA
 
@@ -61,7 +61,7 @@ That said, on my little hobby cluster, I still run Flux for GitOps and use GitHu
 
 ### OTCA
 
-<img src="otca.png" alt="OpenTelemetry Certified Associate badge" width="96" style="float:right;height:auto;margin:0 0 0.5rem 1.25rem;">Rounding out the observability track is the [OpenTelemetry Certified Associate (OTCA)](https://training.linuxfoundation.org/certification/opentelemetry-certified-associate-otca/). OpenTelemetry is hugely important, and while its history is based more in application telemetry, it's becoming the standard for all things monitoring and observability. Like the Prometheus cert, this one had a fair amount of overlap with my day job, but I appreciated going in depth on things like traces, spans, span events, and span logs.
+<img src="otca.png" alt="OpenTelemetry Certified Associate badge" width="96" style="float:right;height:auto;margin:0 0 0.5rem 1.25rem;">Rounding out the observability track is the [OpenTelemetry Certified Associate (OTCA)](https://training.linuxfoundation.org/certification/opentelemetry-certified-associate-otca/). OpenTelemetry is hugely important, and while its history is based more in application telemetry, it's becoming the standard for all things monitoring and observability. Like the Prometheus cert, this one had a fair amount of overlap with my day job, but I appreciated going in depth on things like traces, spans, and span events as well as how the API and the SDKs interact.
 
 ### ICA
 
@@ -73,7 +73,7 @@ That said, on my little hobby cluster, I still run Flux for GitOps and use GitHu
 
 ### CBA
 
-<img src="cba.png" alt="Certified Backstage Associate badge" width="96" style="float:right;height:auto;margin:0 0 0.5rem 1.25rem;">Oh, Backstage. I've been hearing about Backstage for many years, and I was eager to see what the excitement was about. I've worked for places that use Backstage, and the promise of a "developer portal" with hooks for easy deployment APIs seemed great, but I never saw it fully realized. My biggest frustration with the [Certified Backstage Associate (CBA)](https://training.linuxfoundation.org/certification/certified-backstage-associate-cba/) was that it really needed React knowledge, and this one felt the least like a Kubernetes certification.
+<img src="cba.png" alt="Certified Backstage Associate badge" width="96" style="float:right;height:auto;margin:0 0 0.5rem 1.25rem;">Ah, Backstage. I've been hearing about Backstage for many years, and I was eager to see what the excitement was about. More than once, I've worked for places that use Backstage, and the promise of a "developer portal" with hooks for easy deployment APIs seemed great. Unfortunately, I never saw it fully realized, though it seems like you need to fully embrace it as the single developer portal. My biggest surprise with the [Certified Backstage Associate (CBA)](https://training.linuxfoundation.org/certification/certified-backstage-associate-cba/) was how much it leaned on React knowledge, and of all of them, this one felt the least like a Kubernetes certification.
 
 ### CCA
 
