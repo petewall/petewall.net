@@ -1,0 +1,68 @@
+name: TODO Check
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "content/**/*.md"
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  todo-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Find TODOs in content
+        id: todos
+        run: |
+          # Scan every post (not just files changed in this PR) for TODO markers.
+          # Matches `TODO` anywhere — HTML comments (<!-- TODO: ... -->), plain
+          # text, or code — so unfinished notes can't slip onto the published site.
+          todos=""
+          while IFS=: read -r file line text; do
+            [ -z "$file" ] && continue
+            # Trim leading whitespace from the matched line for tidy output.
+            snippet="$(printf '%s' "$text" | sed -e 's/^[[:space:]]*//')"
+            todos="${todos}- \`${file}:${line}\` — ${snippet}"$'\n'
+          done < <(grep -rnI 'TODO' content --include='*.md' || true)
+
+          if [ -n "$todos" ]; then
+            echo "has_todos=true" >> "$GITHUB_OUTPUT"
+            {
+              echo "list<<EOF"
+              printf '%s' "$todos"
+              echo "EOF"
+            } >> "$GITHUB_OUTPUT"
+          else
+            echo "has_todos=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Post TODO reminder
+        if: steps.todos.outputs.has_todos == 'true'
+        uses: marocchino/sticky-pull-request-comment@v3
+        with:
+          header: todo-check
+          message: |
+            ## 📝 TODOs found in content
+
+            The following `TODO` marker(s) are still present and should be addressed before (or tracked after) publishing:
+
+            ${{ steps.todos.outputs.list }}
+            Resolve each one or remove the marker. HTML comments (`<!-- TODO: ... -->`) won't render on the site, but they'll linger in the source until cleaned up.
+
+      - name: Clear TODO reminder
+        if: steps.todos.outputs.has_todos != 'true'
+        uses: marocchino/sticky-pull-request-comment@v3
+        with:
+          header: todo-check
+          hide_and_recreate: true
+          hide_details: true
+          message: |
+            ✅ No TODOs left in content.
