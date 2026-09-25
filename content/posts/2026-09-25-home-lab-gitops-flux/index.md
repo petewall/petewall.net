@@ -1,6 +1,6 @@
 ---
 title: "Home Lab Revisited: Fully GitOps with Flux"
-date: "2026-09-12T12:00:00.000Z"
+date: "2026-09-25T12:00:00.000Z"
 slug: "home-lab-gitops-flux"
 draft: false
 tags:
@@ -30,9 +30,9 @@ There are a lot of GitOps tools out there, but I had already narrowed it down to
 
 ## The mental model
 
-The old way was more imperative: I told the cluster what to *do* ("apply this", "delete that"). The problem with imperative changes is that they don't leave a trail, and the cluster's actual state can easily drift over time away from what was supposed to be there.
+The old way was git-driven, but it was still imperative: I told the cluster what to *do* ("apply this", "delete that"). The problem with imperative changes is that they don't leave a trail, and the cluster's actual state can easily drift over time away from what was supposed to be there.
 
-The declarative model with Flux flips this around. I declare the state I *want* in Git, and a set of controllers running inside the cluster continuously pull that repo and make reality match it. Delete a Deployment by hand? Flux notices it's missing and puts it back. Remove a file from Git? Flux prunes the corresponding resource from the cluster.
+The declarative model with Flux means that there should never be drift. I declare the state I *want* in the Git, and a set of controllers running inside the cluster continuously pull that repo and make reality match it. Delete a Deployment by hand? Flux notices it's missing and puts it back. Remove a file from Git? Flux prunes the corresponding resource from the cluster.
 
 The README at the top of the repo sums up the whole contract in four lines:
 
@@ -55,7 +55,7 @@ flux bootstrap github \
   --read-write-key
 ```
 
-That command installs the Flux controllers, creates a deploy key on the GitHub repo, and — this is the clever part — commits Flux's *own* manifests into the repo under `cluster/flux-system/`. From that moment on, Flux manages Flux. Even upgrading the controllers is just a matter of re-running bootstrap, which bumps the versions of the committed manifests, which Flux then applies to itself.
+That command installs the Flux controllers, creates a deploy key on the GitHub repo, and commits Flux's *own* manifests into the repo under `cluster/flux-system/`. From that moment on, Flux manages Flux. Even upgrading the controllers is just a matter of re-running bootstrap, which bumps the versions of the committed manifests, which Flux then applies to itself.
 
 The `--components-extra` flag pulls in the image-reflector and image-automation controllers. They're how the blog you're reading right now deploys itself. I'll come back to those in detail later.
 
@@ -103,7 +103,7 @@ spec:
     - name: infrastructure
 ```
 
-That `dependsOn` encodes the ordering that used to live in my head. Apps need things like the storage drivers, cert-manager, and the Istio control plane to exist first, so `infrastructure` reconciles fully — `wait: true` — before `apps` is even attempted. No more deploying an app only to watch it `CrashLoop` because the CRD it depends on isn't installed yet.
+That `dependsOn` ensures that things the apps need, like the storage drivers, cert-manager, and the Istio control plane, exist and are healthy first. `infrastructure` reconciles fully (because of `wait: true`) before the `apps` reconciliation is even attempted.
 
 ## What actually lives in the cluster
 
@@ -113,7 +113,6 @@ The `infrastructure/` and `apps/` directories are plain [Kustomize](https://kust
 resources:
   - sealed-secrets
   - cert-manager
-  - databases
   - dynamic-dns
   - istio
   - metrics-server
@@ -124,15 +123,11 @@ And apps:
 
 ```yaml
 resources:
-  - homeassistant
-  - krr
-  - mealie
   - monitoring
-  - ollama
   - petewall-net
 ```
 
-Adding something new to the cluster is now genuinely a two-line pull request: drop a directory in, add its name to the list. Flux takes it from there.
+Adding something new to the cluster is now genuinely a two-line pull request: drop a directory in, add its name to the list. Flux takes it from there. This also means that temporarily disabling a feature is as simple as removing one line from the `kustomization.yaml` file.
 
 Most of these directories deploy upstream software through a Flux `HelmRelease`, which allows for using Helm charts without doing the imperative `helm install`, or rendering with `helm template` to a file before committing to the repo. Flux watches the chart repo, and when I bump a version number in Git it performs the upgrade. Here's the entire definition for the Istio control plane, pinned to a specific version:
 
@@ -167,12 +162,14 @@ That `values:` block is exactly what you'd otherwise pass as a `values.yaml` to 
 
 ## Living with it day-to-day
 
-The nicest thing about all this is how little I do. A normal change is: edit YAML, open a PR, watch the linters run (that's a whole post of its own <!-- TODO: link to the linting and Renovate post once it's published (/home-lab-linting-and-renovate/) -->), merge. Done. The cluster catches up on its own. I do really like how this means that simple PRs will automatically reconcile. On the other hand, it took a while to realize that I won't `kubectl apply` anything anymore. Simple hacks aren't a thing anymore. Maybe that's a good thing, though.
+The nicest thing about all this is how less I have to think about the state of the cluster anymore. I don't have to wonder if I deployed things or not because the only place is the repo. Now, making a normal change is: edit YAML, open a PR, watch the linters run (that's a whole post of its own <!-- TODO: link to the linting and Renovate post once it's published (/home-lab-linting-and-renovate/) -->), merge. Done. The cluster catches up on its own. On the other hand, it took a while to realize that I won't `kubectl apply` anything anymore. Simple hacks aren't a thing anymore, but maybe it's not a bad thing to prevent simple hacks.
 
 ## The payoff
 
-The concrete win showed up the first time a node got wedged and I had to do a full MicroK8s stop/start on the control-plane node to recover it. In the old world that would have been an afternoon of "wait, what was supposed to be running here?" In the GitOps world it was a non-event: the node came back, Flux reconciled, and every workload returned to exactly the state described in `main`. I didn't apply a single manifest by hand.
+The concrete win showed up the first time a node got wedged and I had to do a full MicroK8s stop/start on the control-plane node to recover it. In the old world that would have been an afternoon of "ok, now `kubectl apply` this file, now this file... Wait, am I missing a dependency?" In the GitOps world it was a non-event: the node came back, Flux reconciled, and every workload returned to exactly the state described in `main`. I didn't need to apply a single manifest by hand.
 
-That's the whole pitch, really. The cluster is no longer a pet I've lovingly hand-configured and am terrified to reboot. It's a deterministic function of a Git repo. And that repo is the thing the next two posts are about — how traffic gets into it with Istio <!-- TODO: link to the Istio networking post once it's published (/home-lab-istio-networking/) -->, and how I keep the whole thing honest with linting and Renovate <!-- TODO: link to the linting and Renovate post once it's published (/home-lab-linting-and-renovate/) -->.
+The other wild win is that now I can send updates to the cluster from anywhere in the world. Make a PR, merge it, and a few minutes later, it's running.
+
+That's the whole pitch, really. The cluster is no longer a pet I've lovingly hand-configured and am terrified to reboot. It's a deterministic function of a Git repo. In future posts, i'll talk about other improvements to how I work with the repo and the cluster, like how traffic gets routed with Istio <!-- TODO: link to the Istio networking post once it's published (/home-lab-istio-networking/) -->, and how I keep the whole thing clean and up to date with linting and Renovate <!-- TODO: link to the linting and Renovate post once it's published (/home-lab-linting-and-renovate/) -->.
 
 Cover photo by [ahmet hamdi](https://unsplash.com/@neyn?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/gF_f5jz_gbs?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).
