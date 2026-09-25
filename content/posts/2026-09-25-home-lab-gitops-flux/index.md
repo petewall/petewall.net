@@ -16,7 +16,7 @@ cover:
   image: cover.jpg
   alt: "A close-up of an aircraft turbine engine, densely wrapped in metal piping and fittings."
 ---
-Back when I [deployed the platform](/home-lab-build-5-deploying-the-platform/) a few years ago, I said I wanted to "rely on Git-ops." That was... mostly true. It was true that everything was committed to a git repository. However, it really was mostly a pile of YAML files that I'd need to go into every directory and `kubectl apply -f` 'em. On the plus side, it was fast to iterate; imperative deployments always are. However, it wasn't true GitOps, where what was in the repository, what was declared to be the desired state, was what was in the cluster. So, I'd rely on my own memory of what was applied and what was pending.
+Back when I [deployed the platform](/home-lab-build-5-deploying-the-platform/) a few years ago, I said I wanted to "rely on Git-ops." That was... mostly true. It *was* true that everything was committed to a git repository. However, it really was a pile of YAML files that I'd need to go into every directory and `kubectl apply -f` 'em. On the plus side, it was fast to iterate; imperative deployments always are. However, it *wasn't* true GitOps, where what was in the repository, what was declared to be the desired state, was what was in the cluster. So, I'd rely on my own memory of what was applied and what was pending.
 
 The cluster has changed a *lot* since then, but likely the biggest change is that the whole thing is now genuinely GitOps driven. The [`cluster`](https://github.com/petewall/cluster) repository is now the actual source of truth. If it isn't in `main`, it isn't in the cluster. If I merge it to `main`, it *is* in the cluster, usually within a minute or two, whether I'm at my desk or not.
 
@@ -26,13 +26,13 @@ The tool doing the reconciling is [Flux](https://fluxcd.io/).
 
 <small>Logo by the [Flux project](https://fluxcd.io/), licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).</small>
 
-There are a lot of GitOps tools out there, but I had already narrowed it down to either Flux or ArgoCD. Both are Kubernetes-native and CNCF-graduated, which means they'll fit right in on the cluster and they'll have a lot of support. I went with Flux because it's more focused on headless action, and I had been using it at work in the [Helm Chart Toolbox](https://github.com/grafana/helm-chart-toolbox) project. ArgoCD comes with more features that I wouldn't use, like the user interface and multi-cluster support. I see why it's popular, but it was too much for my homelab.
+There are a lot of GitOps tools out there, but I had already narrowed it down to either Flux or ArgoCD. Both are Kubernetes-native and CNCF-graduated, which means they'll fit right in on the cluster and they'll have a lot of support. I went with Flux because it's more focused on headless action, and I had been using it at work in the [Helm Chart Toolbox](https://github.com/grafana/helm-chart-toolbox) project. ArgoCD comes with more features that I wouldn't use, like the user interface and focus on multi-cluster support. I see why it's popular, but it was too much for my homelab.
 
 ## The mental model
 
-The old way was git-driven, but it was still imperative: I told the cluster what to *do* ("apply this", "delete that"). The problem with imperative changes is that they don't leave a trail, and the cluster's actual state can easily drift over time away from what was supposed to be there.
+The old way was git-driven, but it was still imperative: I told the cluster what to *do* ("apply this", "delete that"). The problem with imperative changes is that it's easy to have things in the cluster that don't match what you want (called "drift"). This can happen with running little experiments and forgetting to clean them up. Or it can happen with making changes in the Git repo and forgetting to apply them. Nothing prevents the cluster's state from drifting over time away from what was supposed to be there.
 
-The declarative model with Flux means that there should never be drift. I declare the state I *want* in the Git, and a set of controllers running inside the cluster continuously pull that repo and make reality match it. Delete a Deployment by hand? Flux notices it's missing and puts it back. Remove a file from Git? Flux prunes the corresponding resource from the cluster.
+The declarative model with Flux means that there should rarely be drift. I declare the state I *want* in the Git, and a set of controllers running inside the cluster continuously pull that repo and make reality match it. Delete a Deployment by hand? Flux notices it's missing and puts it back. Remove a file from Git? Flux prunes the corresponding resource from the cluster.
 
 The README at the top of the repo sums up the whole contract in four lines:
 
@@ -50,7 +50,7 @@ flux bootstrap github \
   --repository=cluster \  # The GitHub repository
   --branch=main \         # The branch to use
   --path=cluster \        # The directory inside of the repo to use
-  --personal \            # Use a personal access token
+  --personal \            # Because this is in my personal GitHub account
   --components-extra=image-reflector-controller,image-automation-controller \
   --read-write-key
 ```
@@ -170,6 +170,6 @@ The concrete win showed up the first time a node got wedged and I had to do a fu
 
 The other wild win is that now I can send updates to the cluster from anywhere in the world. Make a PR, merge it, and a few minutes later, it's running.
 
-That's the whole pitch, really. The cluster is no longer a pet I've lovingly hand-configured and am terrified to reboot. It's a deterministic function of a Git repo. In future posts, i'll talk about other improvements to how I work with the repo and the cluster, like how traffic gets routed with Istio <!-- TODO: link to the Istio networking post once it's published (/home-lab-istio-networking/) -->, and how I keep the whole thing clean and up to date with linting and Renovate <!-- TODO: link to the linting and Renovate post once it's published (/home-lab-linting-and-renovate/) -->.
+That's the whole pitch, really. The cluster is no longer a pet I've lovingly hand-configured and am terrified to reboot. It's a deterministic function of a Git repo. In future posts, I'll talk about other improvements to how I work with the repo and the cluster, like how traffic gets routed with Istio <!-- TODO: link to the Istio networking post once it's published (/home-lab-istio-networking/) -->, and how I keep the whole thing clean and up to date with linting and Renovate <!-- TODO: link to the linting and Renovate post once it's published (/home-lab-linting-and-renovate/) -->.
 
 Cover photo by [ahmet hamdi](https://unsplash.com/@neyn?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/gF_f5jz_gbs?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).
