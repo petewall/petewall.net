@@ -2,7 +2,7 @@
 title: "Writing a GitHub Action: setup-gcx"
 date: "2026-09-30T12:00:00.000Z"
 slug: "setup-gcx-github-action"
-draft: true
+draft: false
 tags:
   - "github-actions"
   - "grafana"
