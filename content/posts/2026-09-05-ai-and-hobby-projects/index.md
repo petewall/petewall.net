@@ -11,16 +11,6 @@ cover:
   image: todo.png
   alt: "A screenshot of computer text with the comment: \"TODO: Finish this...\""
 ---
-
-<!--
-Scaffold notes (delete before publishing):
-- Set `draft: false` when ready to publish.
-- Add a cover image named `cover.jpg` (or update the front matter) to this folder.
-- Confirm the summary and tags.
-- Add a photo credit at the bottom if using an Unsplash image.
-- Consider linking the eInk Radiator series where it's referenced.
--->
-
 I'm an engineer through and through, and like most of us, we like to tinker. Many of us have side projects where we get to exercise our desire to build things, unconstrained by the process and hurdles of real-world professional engineering. Often, my side projects come from a new thing that I just learned about and come with a "wouldn't it be cool if…" kind of thought. I'm also just dangerous enough with coding to be able to make some of them happen.
 
 Why, then, do so many of my projects never reach completion? So many get to about 75% before the momentum stops, the project goes stale, and I move on to the next project… or two. I can think of a few reasons this happens.
