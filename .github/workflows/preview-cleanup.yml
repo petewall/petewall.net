@@ -4,6 +4,7 @@ on:
   pull_request:
     types: [closed]
     branches: [main]
+  workflow_dispatch: {}
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
@@ -13,7 +14,7 @@ permissions:
   pull-requests: write
 
 concurrency:
-  group: pages-preview-pr-${{ github.event.pull_request.number }}
+  group: pages-preview-pr-${{ github.event.pull_request.number || 'manual' }}
   cancel-in-progress: false
 
 jobs:
@@ -27,6 +28,7 @@ jobs:
           fetch-depth: 1
 
       - name: Remove preview directory
+        if: github.event_name == 'pull_request'
         env:
           PR: ${{ github.event.pull_request.number }}
         run: |
@@ -41,7 +43,36 @@ jobs:
           git commit -m "Remove preview for PR #${PR}"
           git push
 
+      - name: Remove stale preview directories
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          open_prs=$(gh pr list --repo "${REPO}" --state open --limit 1000 --json number --jq '.[].number')
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          removed=0
+          for dir in pr-*/; do
+            [ -d "$dir" ] || continue
+            num="${dir#pr-}"
+            num="${num%/}"
+            if ! grep -qx "$num" <<< "$open_prs"; then
+              echo "Removing stale preview: $dir"
+              git rm -r "$dir"
+              removed=1
+            fi
+          done
+          if [ "$removed" -eq 1 ]; then
+            git commit -m "Remove stale PR previews"
+            git push
+          else
+            echo "No stale preview directories found."
+          fi
+
       - uses: marocchino/sticky-pull-request-comment@v3
+        if: github.event_name == 'pull_request'
         with:
           header: preview
           message: |
