@@ -1,8 +1,7 @@
 ---
 title: "WeAreDevelopers World Congress: San Jose Trip Report"
-date: "2026-09-28T12:00:00.000Z"
+date: "2026-10-07T12:00:00.000Z"
 slug: "wearedevelopers-world-congress-san-jose"
-draft: true
 tags:
   - "talks"
 summary: "WeAreDevelopers World Congress 2026 Trip Report"
