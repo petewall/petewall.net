@@ -5,6 +5,7 @@ slug: "eink-radiator-1-display"
 draft: false
 tags:
   - "eink-radiator"
+  - "python"
   - "raspberrypi"
 series:
   - "eink-radiator"

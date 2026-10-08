@@ -6,6 +6,7 @@ draft: false
 tags:
   - "homelab"
   - "kubernetes"
+  - "microk8s"
   - "raspberrypi"
 series:
   - "homelab"

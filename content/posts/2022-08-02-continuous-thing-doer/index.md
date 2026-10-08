@@ -4,6 +4,7 @@ date: "2022-08-02T23:36:09.000Z"
 slug: "continuous-thing-doer"
 draft: false
 tags:
+  - "carvel"
   - "concourse"
   - "kubernetes"
 featured_image: "image-b337219f-b337219f.jpg"

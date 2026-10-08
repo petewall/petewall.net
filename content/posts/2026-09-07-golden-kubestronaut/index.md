@@ -4,8 +4,10 @@ date: "2026-09-07T12:00:00.000Z"
 slug: "golden-kubestronaut"
 draft: false
 tags:
-  - "kubernetes"
   - "certifications"
+  - "flux"
+  - "gitops"
+  - "kubernetes"
 summary: "How I earned all sixteen CNCF certifications to become a Golden Kubestronaut, and my honest take on each one along the way."
 cover:
   image: pins.jpg

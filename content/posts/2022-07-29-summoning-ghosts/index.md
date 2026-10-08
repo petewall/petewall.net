@@ -5,6 +5,8 @@ slug: "summoning-ghosts"
 draft: false
 tags:
   - "blog"
+  - "carvel"
+  - "ghost"
   - "homelab"
   - "kubernetes"
 series:
