@@ -7,6 +7,7 @@ tags:
   - "concourse"
   - "homelab"
   - "kubernetes"
+  - "microk8s"
   - "raspberrypi"
 series:
   - "homelab"

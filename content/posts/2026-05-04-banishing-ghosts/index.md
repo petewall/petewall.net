@@ -4,6 +4,9 @@ date: "2026-05-04T12:00:00.000Z"
 slug: "banishing-ghosts"
 tags:
   - "blog"
+  - "ghost"
+  - "github-actions"
+  - "grafana"
   - "hugo"
   - "kubernetes"
 series:

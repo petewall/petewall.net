@@ -5,6 +5,8 @@ slug: "home-lab-6-quick-update-about-volumes"
 draft: false
 tags:
   - "homelab"
+  - "kubernetes"
+  - "microk8s"
 series:
   - "homelab"
 featured_image: "image-22adca25-22adca25.jpg"
