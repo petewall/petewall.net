@@ -42,8 +42,8 @@ menu:
     - name: About
       url: /about/
       weight: 2
-    - name: Series
-      url: /series/
+    - name: Tags
+      url: /tags/
       weight: 3
     - name: Portfolio
       url: /portfolio/
